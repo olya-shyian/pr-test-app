@@ -1,0 +1,12 @@
+{
+  "singleQuote": true,
+  "quoteProps": "consistent",
+  "printWidth": 80,
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "trailingComma": "es5",
+  "semi": false,
+  "endOfLine": "auto",
+  "eslintIntegration": true
+}
