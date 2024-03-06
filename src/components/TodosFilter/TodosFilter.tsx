@@ -28,7 +28,7 @@ export const TodosFilter: React.FC = () => {
         defaultValue={FilterOptions.All}
         onChange={onFilterStatusChanged}>
         <MenuItem value={FilterOptions.All}>All</MenuItem>
-        <MenuItem value={FilterOptions.Active}>Active</MenuItem>
+        <MenuItem value={FilterOptions.Current}>Current</MenuItem>
         <MenuItem value={FilterOptions.Completed}>Completed</MenuItem>
       </Select>
     </FormControl>

@@ -25,7 +25,7 @@ export const TodoApp: React.FC = () => {
   )
 
   const todosCount = todos.filter((todo) =>
-    chosenfilterOption === FilterOptions.Active
+    chosenfilterOption === FilterOptions.Current
       ? !todo.completed
       : todo.completed
   ).length

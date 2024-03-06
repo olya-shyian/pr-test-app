@@ -3,7 +3,7 @@ import { Todo } from '../interfaces/Todo'
 
 export const filterTodos = (todos: Todo[], filterOpitons: FilterOptions) => {
   switch (filterOpitons) {
-    case FilterOptions.Active:
+    case FilterOptions.Current:
       return todos.filter(({ completed }) => !completed)
 
     case FilterOptions.Completed:
