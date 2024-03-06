@@ -79,23 +79,25 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
 
   return (
     <li
-      className={cn(styles["list-item"], {
+      className={cn(styles['list-item'], {
         [styles.completed]: completed,
         [styles.editing]: isEditing,
       })}>
-      <div className={styles.item} onDoubleClick={onEditing}>
+      <div
+        className={styles.item}
+        onDoubleClick={onEditing}
+        onClick={() =>
+          dispatch(
+            todoActions.update({
+              ...todo,
+              completed: !todo.completed,
+            })
+          )
+        }>
         <Checkbox
           checked={completed}
           id={`toggle-view${id}`}
           className={styles.checkbox}
-          onChange={() =>
-            dispatch(
-              todoActions.update({
-                ...todo,
-                completed: !todo.completed,
-              })
-            )
-          }
           inputProps={{ 'aria-label': 'controlled' }}
         />
 
