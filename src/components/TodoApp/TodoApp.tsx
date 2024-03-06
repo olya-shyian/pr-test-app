@@ -51,7 +51,7 @@ export const TodoApp: React.FC = () => {
   const onTodoChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    if (event.target.value.length > MAX_ALLOW_CHARACTERS) {
+    if (event.target.value.length >= MAX_ALLOW_CHARACTERS) {
       dispatch(
         todoActions.setErrorMessage(ErrorMessagesEnum.MaxTodoTitleLength)
       )
