@@ -19,7 +19,7 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
   const normalizedEditInputValue = editInputValue.trim()
   const dispatch = useAppDispatch()
 
-  const handleTodoChanged = () => {
+  const handleTodoEdit = () => {
     if (normalizedEditInputValue !== title) {
       if (normalizedEditInputValue === '') {
         dispatch(todoActions.delete(todo))
@@ -47,7 +47,7 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
         document.removeEventListener('keyup', keyboardListener)
         break
       case 'Enter':
-        handleTodoChanged()
+        handleTodoEdit()
         document.removeEventListener('keyup', keyboardListener)
         break
       default:
@@ -58,10 +58,18 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
   const handleBlur = () => {
     window.setTimeout(() => {
       if (isEditing) {
-        handleTodoChanged()
+        handleTodoEdit()
       }
     }, 5)
   }
+
+  const onToggleChange = () =>
+    dispatch(
+      todoActions.update({
+        ...todo,
+        completed: !todo.completed,
+      })
+    )
 
   const onEditing = () => {
     if (!isEditing) {
@@ -83,26 +91,17 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
         [styles.completed]: completed,
         [styles.editing]: isEditing,
       })}>
-      <div
-        className={styles.item}
-        onDoubleClick={onEditing}
-        onClick={() =>
-          dispatch(
-            todoActions.update({
-              ...todo,
-              completed: !todo.completed,
-            })
-          )
-        }>
+      <div className={styles.item} onDoubleClick={onEditing}>
         <Checkbox
           checked={completed}
           id={`toggle-view${id}`}
           className={styles.checkbox}
           inputProps={{ 'aria-label': 'controlled' }}
+          onChange={onToggleChange}
         />
 
         <ListItemButton>
-          <label htmlFor={`toggle-view${id}`}>{title}</label>
+          <label htmlFor={`toggle-view${id}`}  className={styles.label}>{title}</label>
         </ListItemButton>
 
         <button
