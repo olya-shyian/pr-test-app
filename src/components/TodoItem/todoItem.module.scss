@@ -1,0 +1,90 @@
+@import '../../styles/variables.scss';
+
+li {
+  position: relative;
+  font-size: 24px;
+
+  .edit {
+    display: none;
+  }
+
+  .checkbox {
+    text-align: center;
+    width: 50px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: none;
+    appearance: none;
+  }
+
+  label {
+    word-break: break-all;
+    padding: 15px 15px 15px 60px;
+    display: block;
+    transition: color 0.4s;
+    cursor: pointer;
+  }
+
+  .delete {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 30px;
+    font-weight: 400;
+    color: $secondary-color;
+    margin-bottom: 15px;
+    transition: color 0.2s ease-out;
+    cursor: pointer;
+
+    &::after {
+      content: '×';
+    }
+  }
+
+  &:hover .delete {
+    display: block;
+    color: $secondary-color;
+  }
+}
+
+li.editing .edit {
+  display: block;
+  width: 733px;
+  padding: 12px 16px;
+  margin: 0 0 0 43px;
+}
+
+li.editing .item {
+  display: none;
+}
+
+.item {
+  margin: 0 25px;
+}
+
+li.completed label {
+  text-decoration: line-through;
+  color: $grey-color;
+}
+
+.edit {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  color: inherit;
+  padding: 6px;
+  box-sizing: border-box;
+  outline-color: $main-color;
+}

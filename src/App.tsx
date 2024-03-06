@@ -1,8 +1,8 @@
 import React from 'react'
-import './App.scss'
+import { TodoApp } from './components/TodoApp/TodoApp'
 
 const App: React.FC = () => {
-  return <div className="App">hello</div>
+  return <TodoApp />
 }
 
 export default App
