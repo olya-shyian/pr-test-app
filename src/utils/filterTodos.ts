@@ -3,13 +3,16 @@ import { Todo } from '../interfaces/Todo'
 
 export const filterTodos = (todos: Todo[], filterOpitons: FilterOptions) => {
   switch (filterOpitons) {
-    case FilterOptions.Current:
+    case FilterOptions.Current: {
       return todos.filter(({ completed }) => !completed)
+    }
 
-    case FilterOptions.Completed:
+    case FilterOptions.Completed: {
       return todos.filter(({ completed }) => completed)
+    }
 
-    default:
+    default: {
       return [...todos]
+    }
   }
 }

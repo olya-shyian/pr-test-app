@@ -16,19 +16,21 @@ export const TodoApp: React.FC = () => {
   const [newTodoTitle, setNewTodoTitle] = useState('')
   const dispatch = useAppDispatch()
   const { todos, chosenfilterOption, errorMessage } = useAppSelector(
-    (state) => state.todoReducer
+    (state) => state.todoReducer,
   )
 
   const filteredTodos = useMemo(
     () => filterTodos(todos, chosenfilterOption),
-    [todos, chosenfilterOption]
+    [todos, chosenfilterOption],
   )
 
-  const todosCount = todos.filter((todo) =>
-    chosenfilterOption === FilterOptions.Current
-      ? !todo.completed
-      : todo.completed
-  ).length
+  const todosCount = todos.filter((todo) => {
+    if (chosenfilterOption === FilterOptions.Current) {
+      return !todo.completed
+    }
+
+    return todo.completed
+  }).length
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -38,10 +40,10 @@ export const TodoApp: React.FC = () => {
     if (newTodoTitle && normalizedTitle && !errorMessage) {
       dispatch(
         todoActions.add({
-          id: +new Date(),
-          title: normalizedTitle,
-          completed: false,
-        })
+          'id': Date.now(),
+          'title': normalizedTitle,
+          'completed': false,
+        }),
       )
 
       setNewTodoTitle('')
@@ -49,11 +51,11 @@ export const TodoApp: React.FC = () => {
   }
 
   const onTodoChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     if (event.target.value.length >= MAX_ALLOW_CHARACTERS) {
       dispatch(
-        todoActions.setErrorMessage(ErrorMessagesEnum.MaxTodoTitleLength)
+        todoActions.setErrorMessage(ErrorMessagesEnum.MaxTodoTitleLength),
       )
     } else {
       dispatch(todoActions.setErrorMessage(''))
@@ -92,7 +94,7 @@ export const TodoApp: React.FC = () => {
         </form>
       </header>
 
-      {!!todos.length && <TodoList todos={filteredTodos} />}
+      {todos.length > 0 && <TodoList todos={filteredTodos} />}
     </Paper>
   )
 }

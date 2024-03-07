@@ -27,8 +27,8 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
         dispatch(
           todoActions.update({
             ...todo,
-            title: normalizedEditInputValue,
-          })
+            'title': normalizedEditInputValue,
+          }),
         )
 
         setEditInputValue(normalizedEditInputValue)
@@ -40,18 +40,21 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
 
   const keyboardListener = (event: KeyboardEvent) => {
     switch (event.key) {
-      case 'Escape':
+      case 'Escape': {
         setIsEditing(false)
         setEditInputValue(title)
 
         document.removeEventListener('keyup', keyboardListener)
         break
-      case 'Enter':
+      }
+      case 'Enter': {
         handleTodoEdit()
         document.removeEventListener('keyup', keyboardListener)
         break
-      default:
+      }
+      default: {
         break
+      }
     }
   }
 
@@ -63,13 +66,12 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
     }, 5)
   }
 
-  const onToggleChange = () =>
-    dispatch(
-      todoActions.update({
-        ...todo,
-        completed: !todo.completed,
-      })
-    )
+  const onToggleChange = () => dispatch(
+    todoActions.update({
+      ...todo,
+      'completed': !todo.completed,
+    }),
+  )
 
   const onEditing = () => {
     if (!isEditing) {
@@ -101,7 +103,12 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
         />
 
         <ListItemButton>
-          <label htmlFor={`toggle-view${id}`}  className={styles.label}>{title}</label>
+          <label
+            htmlFor={`toggle-view${id}`}
+            className={styles.label}
+          >
+            {title}
+          </label>
         </ListItemButton>
 
         <button

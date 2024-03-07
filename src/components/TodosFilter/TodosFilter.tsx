@@ -19,7 +19,7 @@ export const TodosFilter: React.FC = () => {
   }
 
   return (
-    <FormControl sx={{ minWidth: 150 }} size="small">
+    <FormControl sx={{ 'minWidth': 150 }} size="small">
       <InputLabel id="demo-simple-select-standard-label">Status</InputLabel>
       <Select
         labelId="demo-simple-select-standard-label"

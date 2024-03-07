@@ -7,28 +7,28 @@ import { FilterOptions } from '../enums/FilterOptions'
 
 const [localTodoItems, setLocalTodoItems] = getLocalStorage(
   LOCAL_STORAGE_TODO_KEY,
-  []
+  [],
 )
 
 const initialState = {
-  todos: localTodoItems as Todo[],
-  errorMessage: '',
-  chosenfilterOption: FilterOptions.All,
+  'todos': localTodoItems as Todo[],
+  'errorMessage': '',
+  'chosenfilterOption': FilterOptions.All,
 }
 
 const todoSlice = createSlice({
-  name: 'todo',
+  'name': 'todo',
   initialState,
-  reducers: {
-    add: (state, action: PayloadAction<Todo>) => {
+  'reducers': {
+    'add': (state, action: PayloadAction<Todo>) => {
       state.todos = [...state.todos, action.payload]
 
       setLocalTodoItems(state.todos)
     },
 
-    delete: (state, action: PayloadAction<Todo>) => {
+    'delete': (state, action: PayloadAction<Todo>) => {
       const newTodos = state.todos.filter(
-        (currentTodo) => currentTodo.id !== action.payload.id
+        (currentTodo) => currentTodo.id !== action.payload.id,
       )
 
       state.todos = newTodos
@@ -36,10 +36,10 @@ const todoSlice = createSlice({
       setLocalTodoItems(state.todos)
     },
 
-    update: (state, action: PayloadAction<Todo>) => {
+    'update': (state, action: PayloadAction<Todo>) => {
       const todoCopy = [...state.todos]
       const editedTodoIndex = todoCopy.findIndex(
-        (currentTodo) => currentTodo.id === action.payload.id
+        (currentTodo) => currentTodo.id === action.payload.id,
       )
 
       todoCopy[editedTodoIndex] = action.payload
@@ -48,11 +48,11 @@ const todoSlice = createSlice({
       setLocalTodoItems(state.todos)
     },
 
-    setFilterOption: (state, action: PayloadAction<FilterOptions>) => {
+    'setFilterOption': (state, action: PayloadAction<FilterOptions>) => {
       state.chosenfilterOption = action.payload
     },
 
-    setErrorMessage: (state, action: PayloadAction<string>) => {
+    'setErrorMessage': (state, action: PayloadAction<string>) => {
       state.errorMessage = action.payload
     },
   },
