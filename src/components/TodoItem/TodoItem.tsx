@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../app/hooks'
 import { actions as todoActions } from '../../features/todoSlice'
 import Checkbox from '@mui/material/Checkbox'
 import ListItemButton from '@mui/material/ListItemButton'
+import { MAX_ALLOW_CHARACTERS } from '../../consts/commonConsts'
 import styles from './todoItem.module.scss'
 
 interface Props {
@@ -103,10 +104,7 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
         />
 
         <ListItemButton>
-          <label
-            htmlFor={`toggle-view${id}`}
-            className={styles.label}
-          >
+          <label htmlFor={`toggle-view${id}`} className={styles.label}>
             {title}
           </label>
         </ListItemButton>
@@ -121,7 +119,11 @@ export const TodoItem: React.FC<Props> = React.memo(({ todo }) => {
       <input
         ref={editInput}
         value={editInputValue}
-        onChange={(event) => setEditInputValue(event.target.value)}
+        onChange={(event) => {
+          if (event.target.value.length <= MAX_ALLOW_CHARACTERS) {
+            setEditInputValue(event.target.value)
+          }
+        }}
         onBlur={handleBlur}
         type="text"
         className={styles.edit}
